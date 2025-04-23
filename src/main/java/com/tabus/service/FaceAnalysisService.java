@@ -1,9 +1,19 @@
 package com.tabus.service;
 
+
 import com.tabus.entity.FaceAnalysis;
 import com.tabus.mapper.FaceAnalysisMapper;
 import jakarta.annotation.PostConstruct;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.core.MatOfRect;
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.objdetect.CascadeClassifier;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.Base64;
 
 @Service
 public class FaceAnalysisService {
