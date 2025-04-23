@@ -19,6 +19,9 @@ logging:
           service: info
           controller: info
 spring:
+  mvc:
+    servlet:
+      load-on-startup: 10
   main:
     allow-circular-references: true
   datasource:

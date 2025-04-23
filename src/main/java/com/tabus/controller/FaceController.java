@@ -2,14 +2,13 @@ package com.tabus.controller;
 
 import com.tabus.entity.FaceAnalysis;
 import com.tabus.service.FaceAnalysisService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-@RestController
+@RestController()
+@RequestMapping("/face")
 public class FaceController {
     private final FaceAnalysisService analysisService;
 

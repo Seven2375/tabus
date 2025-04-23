@@ -28,9 +28,9 @@ public class FaceAnalysisService {
 
     @PostConstruct
     public void init() {
-        // 加载OpenCV人脸检测模型（需提前下载haarcascade_frontalface_default.xml到resources目录）
-        faceDetector = new CascadeClassifier();
-        faceDetector.load("src/main/resources/haarcascade_frontalface_default.xml");
+        // 从 classpath 加载模型（确保文件在 resources 目录下）
+        String modelPath = getClass().getClassLoader().getResource("haarcascade_frontalface_default.xml").getPath();
+        faceDetector = new CascadeClassifier(modelPath);
     }
 
     public FaceAnalysis analyzeFace(byte[] imageData) {
