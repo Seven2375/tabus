@@ -34,8 +34,11 @@ public class FaceAnalysisService {
     }
 
     public FaceAnalysis analyzeFace(byte[] imageData) {
+
         // 将字节数据转换为OpenCV Mat对象
-        Mat image = Imgcodecs.imdecode(MatOfByte.fromByteArray(imageData), Imgcodecs.IMREAD_COLOR);
+        MatOfByte matOfByte = new MatOfByte();
+        matOfByte.put(0, 0, imageData);
+        Mat image = Imgcodecs.imdecode(matOfByte, Imgcodecs.IMREAD_COLOR);
         Mat grayImage = new Mat();
         Imgproc.cvtColor(image, grayImage, Imgproc.COLOR_BGR2GRAY);
         Imgproc.equalizeHist(grayImage, grayImage);
