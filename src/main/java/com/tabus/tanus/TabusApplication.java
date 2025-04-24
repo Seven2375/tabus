@@ -1,4 +1,4 @@
-package com.tabus.tabus;
+package com.tabus.tanus;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
