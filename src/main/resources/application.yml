@@ -30,7 +30,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 tabus:
   faceplusplus:
-
     api-key: j9oLmjVU94xLw3scQiTAOm8KBkbPNh3V
     api-url: https://api-cn.faceplusplus.com/facepp/v3/detect
     api-secret: IDv7KHddPFgdNH2MmcERpPekJ2bZBpyw
