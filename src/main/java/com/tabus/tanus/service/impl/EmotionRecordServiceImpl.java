@@ -17,13 +17,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author tabus
@@ -39,7 +40,7 @@ public class EmotionRecordServiceImpl extends ServiceImpl<EmotionRecordMapper, E
     private final FacePlusplusProperties properties;
 
     @Override
-    public List<EmotionRecordVO> recognize(MultipartFile image) {
+    public List<EmotionRecordVO> recognize(@NotNull MultipartFile image) {
         try {
 
             RequestBody formBody = new MultipartBody.Builder()
@@ -54,8 +55,6 @@ public class EmotionRecordServiceImpl extends ServiceImpl<EmotionRecordMapper, E
                     )
                     .build();
 
-            log.info("url:{}",properties.getApiUrl());
-
             Request request = new Request.Builder()
                     .url(properties.getApiUrl())
                     .post(formBody)
@@ -65,7 +64,7 @@ public class EmotionRecordServiceImpl extends ServiceImpl<EmotionRecordMapper, E
             if (!response.isSuccessful()) {
                 throw new RuntimeException("旷世API调用失败: " + response.code());
             }
-            String jsonResponse = response.body().string();
+            String jsonResponse = response.body() != null ? response.body().string() : null;
             log.info("Emotion API response: {}", jsonResponse);
 
             EmotionResponseDTO respDto = gson.fromJson(jsonResponse, EmotionResponseDTO.class);
@@ -89,7 +88,7 @@ public class EmotionRecordServiceImpl extends ServiceImpl<EmotionRecordMapper, E
 
                 return getEmotionRecordVO(entity);
             }).collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (IOException e) {
             log.error("Emotion recognition failed", e);
             throw new RuntimeException("情绪识别失败", e);
         }
