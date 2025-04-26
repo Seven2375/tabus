@@ -95,7 +95,6 @@ public class EmotionRecordServiceImpl extends ServiceImpl<EmotionRecordMapper, E
     }
 
     private static @NotNull EmotionRecordVO getEmotionRecordVO(@NotNull EmotionRecord entity) {
-
         EmotionRecordVO vo = new EmotionRecordVO();
         vo.setId(entity.getId());
         vo.setAnger(entity.getAnger());
