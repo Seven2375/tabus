@@ -30,7 +30,7 @@ public class EmotionRecordController {
     private final IEmotionRecordService emotionService;
 
     /**
-     * 识别上传图片中的学生情绪
+     * 识别上传图片中的学生情绪。
      * @param image 学生照片文件
      * @return 情绪识别结果列表
      */
