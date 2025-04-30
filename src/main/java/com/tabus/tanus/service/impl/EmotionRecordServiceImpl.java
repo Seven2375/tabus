@@ -85,9 +85,9 @@ public class EmotionRecordServiceImpl extends ServiceImpl<EmotionRecordMapper, E
                 entity.setCreatedAt(LocalDateTime.now());
                 recordMapper.insert(entity);
 
-
                 return getEmotionRecordVO(entity);
             }).collect(Collectors.toList());
+
         } catch (IOException e) {
             log.error("Emotion recognition failed", e);
             throw new RuntimeException("情绪识别失败", e);

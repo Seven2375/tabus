@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author tabus
@@ -34,19 +34,19 @@ public class EmotionRecord implements Serializable {
 
     private String faceToken;
 
-    private Double anger;
+    private Double anger;   //愤怒
 
-    private Double disgust;
+    private Double disgust; //厌恶
 
-    private Double fear;
+    private Double fear;    //恐惧
 
-    private Double happiness;
+    private Double happiness;   //高兴
 
-    private Double neutral;
+    private Double neutral; //平静
 
-    private Double sadness;
+    private Double sadness; //伤心
 
-    private Double surprise;
+    private Double surprise;    //惊讶
 
     private LocalDateTime createdAt;
 
