@@ -49,7 +49,7 @@ public class EmotionRecordServiceImpl extends ServiceImpl<EmotionRecordMapper, E
                     .addFormDataPart("api_secret", properties.getApi_secret())
                     //emotion:情绪识别结果。返回值包含以下字段。每个字段的值都是一个浮点数，.
                     // 范围 [0,100]，小数点后 3 位有效数字。每个字段的返回值越大，
-                    // 则该字段代表的状态的置信度越高。字段值的总和等于 100。
+                    // 则该字段代表的状态的置信度越高。字段值的总和等于 100.
                     .addFormDataPart("return_attributes", "emotion")
                     .addFormDataPart(
                             "image_file",
