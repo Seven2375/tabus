@@ -8,12 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
- * 课堂分析数据表 服务实现类
- * </p>
- *
- * @author xuege
- * @since 2025-05-07
+ * 课堂分析服务实现类
  */
 @Service
 public class ClassroomAnalysisServiceImpl extends ServiceImpl<ClassroomAnalysisMapper, ClassroomAnalysis> implements IClassroomAnalysisService {
@@ -23,6 +18,7 @@ public class ClassroomAnalysisServiceImpl extends ServiceImpl<ClassroomAnalysisM
 
     @Override
     public ClassroomAnalysis getAnalysisByCourseId(Long courseId) {
+        // 根据课程 ID 查询课堂分析数据
         return classroomAnalysisMapper.selectByCourseId(courseId);
     }
 }

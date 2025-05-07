@@ -21,12 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * <p>
- * 服务实现类
- * </p>
- *
- * @author tabus
- * @since 2025-04-24
+ * 情绪记录服务实现类，实现了 IEmotionRecordService 接口
  */
 @Service
 @RequiredArgsConstructor

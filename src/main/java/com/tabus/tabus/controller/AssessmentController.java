@@ -14,6 +14,12 @@ public class AssessmentController {
     @Autowired
     private IAssessmentService assessmentService;
 
+
+    /**
+     * 根据课程 ID 评估教学情况的接口
+     * @param courseId 课程 ID
+     * @return 教学评估结果字符串
+     */
     @GetMapping("/{courseId}")
     public String assessTeaching(@PathVariable Long courseId) {
         return assessmentService.assessTeaching(courseId);

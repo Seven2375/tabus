@@ -8,16 +8,17 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
- *
- * @author tabus
- * @since 2025-04-24
+ * 情绪记录 Mapper 接口
  */
 @Mapper
 public interface EmotionRecordMapper extends BaseMapper<EmotionRecord> {
 
+    /**
+     * 根据课程 ID 和记录类型查询情绪记录数据
+     * @param courseId 课程 ID
+     * @param type 记录类型（student/teacher）
+     * @return 情绪记录列表
+     */
     @Select("SELECT * FROM emotion_record WHERE course_id = #{courseId} AND type = #{type}")
     List<EmotionRecord> selectByCourseIdAndType(Long courseId, String type);
 }

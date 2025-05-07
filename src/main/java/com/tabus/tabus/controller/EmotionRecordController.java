@@ -15,12 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 /**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author tabus
- * @since 2025-04-24
+ * 情绪记录控制器，处理情绪识别的请求
  */
 @RestController
 @RequestMapping("/admin/emotion")

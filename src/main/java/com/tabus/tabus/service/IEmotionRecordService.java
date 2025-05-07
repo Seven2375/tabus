@@ -7,18 +7,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+
 /**
- * <p>
- *  服务类
- * </p>
- *
- * @author tabus
- * @since 2025-04-24
+ * 情绪记录服务接口，继承自 IService，提供情绪识别功能
  */
 public interface IEmotionRecordService extends IService<EmotionRecord> {
 
     /**
-     * 调用旷世人脸识别API，识别图片中的学生情绪
+     * 调用旷世人脸识别 API，识别图片中的学生情绪
+     * @param image 上传的图片文件
+     * @return 情绪识别结果列表
      */
     List<EmotionRecordVO> recognize(MultipartFile image);
 }
