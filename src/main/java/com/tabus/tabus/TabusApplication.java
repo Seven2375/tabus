@@ -10,6 +10,8 @@ public class TabusApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TabusApplication.class, args);
+        System.out.println("兄弟们加油冲冲冲！");
+        System.out.println("TABUS 塔布思智慧课堂欢迎您！！");
     }
 
 }
