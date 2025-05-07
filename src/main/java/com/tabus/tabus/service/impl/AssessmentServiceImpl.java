@@ -9,10 +9,11 @@ import com.tabus.tabus.pojo.entity.ClassroomAnalysis;
 import com.tabus.tabus.pojo.entity.DiscussionText;
 import com.tabus.tabus.service.IAssessmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
+@Service
 public class AssessmentServiceImpl implements IAssessmentService {
 
     @Autowired
