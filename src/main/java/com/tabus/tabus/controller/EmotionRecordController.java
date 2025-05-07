@@ -1,8 +1,8 @@
-package com.tabus.tanus.controller;
+package com.tabus.tabus.controller;
 
 
-import com.tabus.tanus.pojo.vo.EmotionRecordVO;
-import com.tabus.tanus.service.IEmotionRecordService;
+import com.tabus.tabus.pojo.vo.EmotionRecordVO;
+import com.tabus.tabus.service.IEmotionRecordService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

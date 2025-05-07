@@ -1,4 +1,4 @@
-package com.tabus.tanus.pojo.entity;
+package com.tabus.tabus.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;

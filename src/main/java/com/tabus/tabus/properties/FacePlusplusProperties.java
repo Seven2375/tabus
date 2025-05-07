@@ -1,4 +1,4 @@
-package com.tabus.tanus.properties;
+package com.tabus.tabus.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

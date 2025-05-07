@@ -1,4 +1,4 @@
-package com.tabus.tanus.pojo.vo;
+package com.tabus.tabus.pojo.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

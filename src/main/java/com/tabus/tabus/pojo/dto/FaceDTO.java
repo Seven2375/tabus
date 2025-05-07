@@ -1,4 +1,4 @@
-package com.tabus.tanus.pojo.dto;
+package com.tabus.tabus.pojo.dto;
 
 import lombok.Data;
 

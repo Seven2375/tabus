@@ -1,8 +1,8 @@
-package com.tabus.tanus.service;
+package com.tabus.tabus.service;
 
-import com.tabus.tanus.pojo.entity.EmotionRecord;
+import com.tabus.tabus.pojo.entity.EmotionRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.tabus.tanus.pojo.vo.EmotionRecordVO;
+import com.tabus.tabus.pojo.vo.EmotionRecordVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
