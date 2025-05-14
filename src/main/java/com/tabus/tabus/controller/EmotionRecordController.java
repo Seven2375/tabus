@@ -1,6 +1,7 @@
 package com.tabus.tabus.controller;
 
 
+import com.tabus.tabus.common.Result;
 import com.tabus.tabus.pojo.vo.EmotionRecordVO;
 import com.tabus.tabus.service.IEmotionRecordService;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,8 @@ public class EmotionRecordController {
      * @return 情绪识别结果列表
      */
     @PostMapping("/recognize")
-    public List<EmotionRecordVO> recognize(@RequestPart MultipartFile image) {
+    public Result recognize(@RequestPart MultipartFile image) {
         log.info("Start emotion recognition for uploaded image");
-        return emotionService.recognize(image);
+        return Result.success(emotionService.recognize(image));
     }
 }

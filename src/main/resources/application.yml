@@ -28,7 +28,17 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      enabled: true  # 启用文件上传（默认开启）
+      max-file-size: 200MB  # 单个文件最大大小
+      max-request-size: 500MB  # 总请求最大大小
+      file-size-threshold: 0  # 文件写入磁盘的阈值（0 表示直接写入磁盘）
 tabus:
+  video:
+    upload-dir: "D:/tabus_videos"  # 视频存储目录（根据实际路径修改）
+  ffmpeg:
+    path: "ffmpeg"  # 若 FFmpeg 已添加到环境变量，直接写 "ffmpeg"；否则写绝对路径（如 "D:/ffmpeg/bin/ffmpeg.exe"）
   faceplusplus:
     api-key: j9oLmjVU94xLw3scQiTAOm8KBkbPNh3V
     api-url: https://api-cn.faceplusplus.com/facepp/v3/detect

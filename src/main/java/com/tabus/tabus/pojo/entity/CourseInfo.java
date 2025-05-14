@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -37,8 +39,7 @@ public class CourseInfo implements Serializable {
     private String courseName;
 
 //    @ApiModelProperty(value = "班级（如“高三1班”）")
-    @TableField(value = "class")
-    private String _class;
+    private String className;
 
 //    @ApiModelProperty(value = "课程开始时间")
     private LocalDateTime startTime;

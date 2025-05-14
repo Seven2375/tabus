@@ -1,6 +1,7 @@
 package com.tabus.tabus.controller;
 
 
+import com.tabus.tabus.common.Result;
 import com.tabus.tabus.pojo.entity.ClassroomAnalysis;
 import com.tabus.tabus.service.IClassroomAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class ClassroomAnalysisController {
      * @return 课堂分析实体
      */
     @GetMapping("/{courseId}")
-    public ClassroomAnalysis getAnalysis(@PathVariable Long courseId) {
+    public Result getAnalysis(@PathVariable Long courseId) {
         // 调用课堂分析服务的获取分析数据方法
-        return classroomAnalysisService.getAnalysisByCourseId(courseId);
+        return Result.success(classroomAnalysisService.getAnalysisByCourseId(courseId));
     }
 }

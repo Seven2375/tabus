@@ -34,6 +34,10 @@ public class EmotionRecord implements Serializable {
 
     private String faceToken;
 
+    private Long courseId; // 关联课程 ID
+
+    private String type;   // 记录类型（student/teacher）
+
     private Double anger;   //愤怒
 
     private Double disgust; //厌恶

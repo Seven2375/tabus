@@ -1,6 +1,7 @@
 package com.tabus.tabus.controller;
 
 
+import com.tabus.tabus.common.Result;
 import com.tabus.tabus.pojo.entity.CourseInfo;
 import com.tabus.tabus.service.ICourseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,11 @@ public class CourseInfoController {
      * @return 课程的 ID
      */
     @PostMapping("/start")
-    public Long startCourse(@RequestBody CourseInfo courseInfo) {
+    public Result startCourse(@RequestBody CourseInfo courseInfo) {
         // 设置课程的开始时间为当前时间
         courseInfo.setStartTime(LocalDateTime.now());
         // 调用课程服务的开始课程方法
-        return courseService.startCourse(courseInfo);
+        return Result.success(courseService.startCourse(courseInfo));
     }
 
     /**
@@ -40,8 +41,9 @@ public class CourseInfoController {
      * @param courseId 课程 ID
      */
     @PostMapping("/end")
-    public void endCourse(Long courseId) {
+    public Result endCourse(Long courseId) {
         // 调用课程服务的结束课程方法，结束时间为当前时间
         courseService.endCourse(courseId, LocalDateTime.now());
+        return Result.success();
     }
 }
