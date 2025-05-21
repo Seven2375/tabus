@@ -7,8 +7,10 @@ import com.tabus.tabus.pojo.entity.EmotionRecord;
 import com.tabus.tabus.pojo.vo.EmotionRecordVO;
 import com.tabus.tabus.service.IEmotionRecordService;
 import com.tabus.tabus.service.IVideoProcessingStatusService;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.scheduling.annotation.Async;
@@ -42,9 +44,46 @@ public class VideoProcessingService {
     // 视频存储目录（配置在 application.yml）
     @Value("${tabus.video.upload-dir}")
     private String uploadDir;
-    // FFmpeg 路径（配置在 application.yml，默认从环境变量获取）
-    @Value("${tabus.ffmpeg.path:D:\\Software\\ffmpeg-7.1.1-essentials_build\\bin\\ffmpeg.exe}")
+    // FFmpeg 路径（配置在 application.yml，默认为空）
+    @Value("${tabus.ffmpeg.path:}")
+    private String configuredFfmpegPath;
+
+    // 最终使用的 FFmpeg 路径
     private String ffmpegPath;
+
+    /**
+     * 初始化方法，在 Bean 创建后执行，验证并设置 FFmpeg 路径
+     */
+    @PostConstruct
+    public void init() {
+        try {
+            // 1. 优先使用配置文件中指定的路径
+            if (StrUtil.isNotBlank(configuredFfmpegPath)) {
+                if (isValidFfmpegPath(configuredFfmpegPath)) {
+                    this.ffmpegPath = configuredFfmpegPath;
+                    log.info("使用配置文件中的 FFmpeg 路径: {}", ffmpegPath);
+                    return;
+                }
+                log.warn("配置文件中的 FFmpeg 路径无效: {}", configuredFfmpegPath);
+            }
+
+            // 2. 尝试从系统 PATH 环境变量中查找
+            String pathFromEnv = findFfmpegInPath();
+            if (pathFromEnv != null) {
+                this.ffmpegPath = pathFromEnv;
+                log.info("从系统 PATH 中找到 FFmpeg: {}", ffmpegPath);
+                return;
+            }
+
+            // 3. 所有查找方法都失败，抛出异常
+            throw new IllegalStateException("无法找到 FFmpeg 可执行文件，请配置 tabus.ffmpeg.path");
+
+        } catch (Exception e) {
+            log.error("初始化 FFmpeg 路径失败", e);
+            throw new RuntimeException("初始化 FFmpeg 路径失败", e);
+        }
+    }
+
 
     /**
      * 异步处理视频数据传输对象
@@ -245,5 +284,71 @@ public class VideoProcessingService {
         }
         
         return framePaths;
+    }
+
+
+
+    /**
+     * 验证 FFmpeg 路径是否有效
+     */
+    private boolean isValidFfmpegPath(String path) {
+        if (StrUtil.isBlank(path)) return false;
+
+        File ffmpegFile = new File(path);
+        if (!ffmpegFile.exists()) {
+            return false;
+        }
+
+        // 检查是否可执行（适用于 Linux/macOS）
+        if (!ffmpegFile.canExecute()) {
+            // 对于 Windows，文件存在即可
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                return true;
+            }
+            return false;
+        }
+
+        // 进一步验证是否为有效的 FFmpeg 可执行文件
+        try {
+            Process process = new ProcessBuilder(path, "-version").start();
+            int exitCode = process.waitFor();
+            return exitCode == 0;
+        } catch (Exception e) {
+            log.warn("验证 FFmpeg 版本失败: {}", path, e);
+            return false;
+        }
+    }
+
+    /**
+     * 在系统 PATH 环境变量中查找 FFmpeg
+     */
+    private String findFfmpegInPath() {
+        log.info("尝试从系统 PATH 中查找 FFmpeg...");
+
+        String pathEnv = System.getenv("PATH");
+        if (pathEnv == null) {
+            log.warn("系统 PATH 环境变量未设置");
+            return null;
+        }
+
+        // 根据操作系统确定可执行文件扩展名
+        String[] extensions = new String[] { "" };
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            extensions = new String[] { ".exe", ".bat", ".cmd" };
+        }
+
+        // 分割 PATH 并检查每个目录
+        String[] pathDirs = pathEnv.split(File.pathSeparator);
+        for (String pathDir : pathDirs) {
+            for (String ext : extensions) {
+                File file = new File(pathDir, "ffmpeg" + ext);
+                if (file.exists() && file.canExecute()) {
+                    return file.getAbsolutePath();
+                }
+            }
+        }
+
+        log.warn("在系统 PATH 中未找到 FFmpeg");
+        return null;
     }
 }
