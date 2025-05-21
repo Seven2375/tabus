@@ -11,7 +11,7 @@
  Target Server Version : 80200
  File Encoding         : 65001
 
- Date: 14/05/2025 23:08:41
+ Date: 21/05/2025 14:57:20
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,7 @@ CREATE TABLE `classroom_analysis`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id` ASC) USING BTREE,
   CONSTRAINT `classroom_analysis_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course_info` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '课堂分析数据表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '课堂分析数据表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of classroom_analysis
@@ -46,13 +46,13 @@ INSERT INTO `classroom_analysis` VALUES (4, 4, 100, 0, 77.02855555555556, 0.0456
 DROP TABLE IF EXISTS `course_info`;
 CREATE TABLE `course_info`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `teacher` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '教师姓名',
-  `course_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '课程名称',
-  `class_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '班级（如“高三1班”）',
+  `teacher` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '教师姓名',
+  `course_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '课程名称',
+  `class_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '班级（如“高三1班”）',
   `start_time` datetime NOT NULL COMMENT '课程开始时间',
   `end_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '课程结束时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '课程基本信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '课程基本信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of course_info
@@ -69,12 +69,12 @@ DROP TABLE IF EXISTS `discussion_text`;
 CREATE TABLE `discussion_text`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `course_id` bigint NOT NULL COMMENT '关联课程ID',
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '讨论内容（如学生发言）',
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '讨论内容（如学生发言）',
   `timestamp` datetime NOT NULL COMMENT '发言时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `course_id`(`course_id` ASC) USING BTREE,
   CONSTRAINT `discussion_text_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course_info` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '课堂讨论文本表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '课堂讨论文本表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of discussion_text
@@ -86,9 +86,9 @@ CREATE TABLE `discussion_text`  (
 DROP TABLE IF EXISTS `emotion_record`;
 CREATE TABLE `emotion_record`  (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `request_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `image_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `face_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `request_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `face_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `anger` double NULL DEFAULT NULL,
   `disgust` double NULL DEFAULT NULL,
   `fear` double NULL DEFAULT NULL,
@@ -98,11 +98,11 @@ CREATE TABLE `emotion_record`  (
   `surprise` double NULL DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `course_id` bigint NULL DEFAULT NULL COMMENT '关联课程ID',
-  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '记录类型（student/teacher）',
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '记录类型（student/teacher）',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_request_id`(`request_id` ASC) USING BTREE,
   INDEX `idx_created_at`(`created_at` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '表情识别表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '表情识别表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of emotion_record
