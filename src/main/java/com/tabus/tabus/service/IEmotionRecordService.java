@@ -1,11 +1,14 @@
 package com.tabus.tabus.service;
 
+import cn.hutool.extra.tokenizer.engine.analysis.AnalysisResult;
+import com.tabus.tabus.pojo.entity.ClassroomAnalysis;
 import com.tabus.tabus.pojo.entity.EmotionRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tabus.tabus.pojo.vo.EmotionRecordVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -19,4 +22,10 @@ public interface IEmotionRecordService extends IService<EmotionRecord> {
      * @return 情绪识别结果列表
      */
     List<EmotionRecordVO> recognize(MultipartFile image);
+
+    /**
+     * 根据课程id获取本节课的课程分析
+     * @param courseId
+     */
+    Map<String, Object> getAnalysisByCourseId(Long courseId);
 }
