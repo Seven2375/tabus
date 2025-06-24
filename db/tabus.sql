@@ -11,7 +11,7 @@
  Target Server Version : 80200
  File Encoding         : 65001
 
- Date: 24/06/2025 19:26:21
+ Date: 25/06/2025 00:54:52
 */
 
 SET NAMES utf8mb4;
@@ -54,6 +54,10 @@ CREATE TABLE `classroom_analysis`  (
 -- Records of classroom_analysis
 -- ----------------------------
 INSERT INTO `classroom_analysis` VALUES (20, 23, 100, 0, 77.02855555555556, 0.04566666666666666, 3.6573333333333338);
+INSERT INTO `classroom_analysis` VALUES (21, 24, 88, 22, 45, 5.5, 22);
+INSERT INTO `classroom_analysis` VALUES (22, 25, 66, 44, 53, 3, 11);
+INSERT INTO `classroom_analysis` VALUES (23, 27, 23, 42, 11, 2, 1);
+INSERT INTO `classroom_analysis` VALUES (24, 23, 100, 0, 77.02855555555556, 0.04566666666666666, 3.6573333333333338);
 
 -- ----------------------------
 -- Table structure for course_info
@@ -78,7 +82,7 @@ CREATE TABLE `course_info`  (
 -- ----------------------------
 -- Records of course_info
 -- ----------------------------
-INSERT INTO `course_info` VALUES (23, '学哥', '汉堡历史', '肉饼2班', '2025-06-24 15:38:57', '2025-06-24 15:50:53', 1, 2);
+INSERT INTO `course_info` VALUES (23, '学哥', '汉堡历史', '肉饼2班', '2025-06-24 15:38:57', '2025-06-25 00:38:45', 1, 2);
 INSERT INTO `course_info` VALUES (24, '煮开', '饼胚烤制', '饼胚1班', '2025-06-24 15:44:33', '2025-06-24 15:44:32', 3, 1);
 INSERT INTO `course_info` VALUES (25, '学哥', '肉饼种类', '肉饼2班', '2025-06-24 15:44:50', '2025-06-24 15:44:49', 1, 2);
 INSERT INTO `course_info` VALUES (27, '煮开', '汉堡配料调制', '饼胚1班', '2025-06-24 16:49:22', '2025-06-24 16:49:21', 3, 1);
@@ -500,6 +504,36 @@ INSERT INTO `emotion_record` VALUES (369, '1750751443,0c1bd21d-01d9-4e07-84f1-6b
 INSERT INTO `emotion_record` VALUES (370, '1750751443,0c1bd21d-01d9-4e07-84f1-6b0e487e1c98', '+5oKVJB240YGj018Rk2SWQ==', 'a63cd6be6df48976872ee801d68a4d6f', 0.001, 0.001, 0.001, 99.992, 0.001, 0.001, 0.005, '2025-06-24 15:50:43', 23, 'student');
 INSERT INTO `emotion_record` VALUES (371, '1750751443,0c1bd21d-01d9-4e07-84f1-6b0e487e1c98', '+5oKVJB240YGj018Rk2SWQ==', 'a90a0873de9b9d14b35d9a3678becda2', 0.147, 1.477, 1.08, 96.114, 0.604, 0.431, 0.147, '2025-06-24 15:50:43', 23, 'student');
 INSERT INTO `emotion_record` VALUES (372, '1750751443,0c1bd21d-01d9-4e07-84f1-6b0e487e1c98', '+5oKVJB240YGj018Rk2SWQ==', 'cbe5a4cd7b9d5df6a82b1c95ebec87ff', 0.043, 0.043, 0.043, 0.972, 0.043, 98.812, 0.043, '2025-06-24 15:50:43', 23, 'student');
+INSERT INTO `emotion_record` VALUES (373, '1750783074,84e9e548-4e59-4023-9fa1-97e11866b5c4', 'tV9yywN3KMrMMA+DbvWfwg==', '21b5b3039ff6b50375f4afa24a0bc646', 0.002, 0.003, 0.002, 99.702, 0.002, 0.281, 0.007, '2025-06-25 00:37:55', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (374, '1750783075,89a505bd-bfa7-49ab-96da-c568fda4c293', '/sktHVxs7MomhjCYYAA+5A==', '9d178da2d7b7c8fa40e859f2ddfe8476', 0.122, 0.08, 0.048, 98.454, 0.033, 1.183, 0.079, '2025-06-25 00:37:55', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (375, '1750783076,7225c2e5-469c-49a6-823a-3866718225aa', 'hC1DF+oNhYaq8L5uyCtRoQ==', '4fbf8637a31d641182cb167fbbe4fd0e', 0.018, 0.208, 0.018, 92.882, 0.084, 6.753, 0.037, '2025-06-25 00:37:56', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (376, '1750783076,09e541fd-cc4e-4adc-8ff5-83541c67b00e', 'VCgRTBs9igv/X6k0Sxo9VQ==', 'b96f3301ffc063a02038cca41d64e0f6', 0.002, 0.002, 0.002, 99.97, 0.002, 0.019, 0.004, '2025-06-25 00:37:56', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (377, '1750783077,a04c53b3-ac53-4333-ba59-8c6736f5d89c', 'fEGbK1dXHzaaYoUXZrdzwQ==', 'ef0549bb305d85320bbed8cf805aba40', 0.009, 0.91, 0.009, 98.911, 0.009, 0.141, 0.01, '2025-06-25 00:37:57', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (378, '1750783077,dfad206e-f715-4149-96ed-38e0252dbfde', '6XvArDX6AhhmB4kWdnkm6w==', '2d655bda0017064523ad9247d2f4b8f8', 0.148, 4.162, 0.537, 3.261, 15.755, 0.148, 75.99, '2025-06-25 00:37:57', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (379, '1750783078,fa9486fb-8648-4971-ba40-b7b5d3c72a1b', 'C6c8B4IN2Lfh5qT35qQAKg==', 'cd6bcc254b663c366618829a9a05ce20', 0.002, 0.034, 0.002, 99.842, 0.002, 0.072, 0.045, '2025-06-25 00:37:59', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (380, '1750783079,045ace1f-a1cd-46f7-b5e1-3ed4f9adeb61', 'XIlfm8adpMpBBBTaa+QK9A==', '749f1b96ff3589b2f734a888ab3846ba', 0.002, 0.017, 0.002, 99.88, 0.002, 0.018, 0.08, '2025-06-25 00:37:59', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (381, '1750783079,f71a53c7-ee48-4f36-874a-23bf679dfd08', 'Z9nrEm2bJmjE5W8xEtcskw==', 'bcf75ddc775c71e9a808b3f32ad918b3', 0.106, 11.787, 0.799, 0.355, 17.027, 0.106, 69.821, '2025-06-25 00:38:00', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (382, '1750783086,bf46983f-09bb-4f3d-9905-af2db1b72e09', 'ddlsZhKVYeg+K5D11KVUDA==', 'c001704cb600f336e4c678a0284a0314', 34.362, 1.826, 3.182, 13.045, 7.899, 37.86, 1.826, '2025-06-25 00:38:07', 23, 'student');
+INSERT INTO `emotion_record` VALUES (383, '1750783088,876c9527-55fe-4d96-9f2a-10689131dd81', '85UUoqxyZdJmxjZR2TgiHw==', '6041998b5c2b9900ebe990fbfec485a5', 1.155, 0.004, 0.017, 98.809, 0.004, 0.006, 0.004, '2025-06-25 00:38:08', 23, 'student');
+INSERT INTO `emotion_record` VALUES (384, '1750783089,3411a0a3-9d9a-469c-b36b-272951703399', 'dn+KEYZ/jDHdQRaLjZAvqA==', 'acb7d07e9867070ff93c077486e0c0f7', 0.272, 5.043, 0.077, 88.294, 0.077, 6.158, 0.077, '2025-06-25 00:38:10', 23, 'student');
+INSERT INTO `emotion_record` VALUES (385, '1750783091,5311914a-9ed6-4140-b901-65be5bf97b79', '/t1D8nO+t9aR6rezEf1HxA==', '4b80c10a0e19487e40521353224e32e1', 0.031, 0.13, 0.031, 99.539, 0.184, 0.055, 0.031, '2025-06-25 00:38:11', 23, 'student');
+INSERT INTO `emotion_record` VALUES (386, '1750783092,a437a91e-7845-4cb9-91ae-faf86c90564c', 'Vdd24M+86gPRWXCrrgtzeA==', 'be620eba86495089ce2a1a5ec95d3e4d', 0.036, 0.05, 0.008, 98.983, 0.007, 0.909, 0.007, '2025-06-25 00:38:13', 23, 'student');
+INSERT INTO `emotion_record` VALUES (387, '1750783092,a437a91e-7845-4cb9-91ae-faf86c90564c', 'Vdd24M+86gPRWXCrrgtzeA==', '98455b465dc16a562d35513e9d07988c', 1.247, 50.335, 1.056, 2.354, 15.158, 1.528, 28.321, '2025-06-25 00:38:13', 23, 'student');
+INSERT INTO `emotion_record` VALUES (388, '1750783094,d06fdb42-9f3a-4ee3-90aa-b2695d6189af', 'WUe5ibWtbKvoRBiXwLusUA==', 'fd8b77e2ebc63e5259020d70a99ceadb', 7.552, 0.536, 7.279, 82.746, 0.536, 0.536, 0.814, '2025-06-25 00:38:14', 23, 'student');
+INSERT INTO `emotion_record` VALUES (389, '1750783094,d06fdb42-9f3a-4ee3-90aa-b2695d6189af', 'WUe5ibWtbKvoRBiXwLusUA==', '8f5c5d4db9e189df48dbfd7ab0c2facb', 0.093, 0.093, 9.094, 78.294, 0.589, 11.742, 0.093, '2025-06-25 00:38:14', 23, 'student');
+INSERT INTO `emotion_record` VALUES (390, '1750783094,d06fdb42-9f3a-4ee3-90aa-b2695d6189af', 'WUe5ibWtbKvoRBiXwLusUA==', '602c9ce1e6d4ce10d45579f5c6567506', 0.126, 1.124, 1.432, 1.588, 0.103, 95.573, 0.054, '2025-06-25 00:38:14', 23, 'student');
+INSERT INTO `emotion_record` VALUES (391, '1750783096,50ba3d85-0ca5-4186-8250-01844ba01ca9', '5wMkry20WsFtVLxZDNriGQ==', '1c3aa4f822f3d707585786e436df2b8c', 1.579, 0.889, 0.238, 88.954, 1.378, 6.744, 0.216, '2025-06-25 00:38:16', 23, 'student');
+INSERT INTO `emotion_record` VALUES (392, '1750783096,50ba3d85-0ca5-4186-8250-01844ba01ca9', '5wMkry20WsFtVLxZDNriGQ==', 'aea0f2ac6868c1ddc47cbeaceb5ae7c1', 0.003, 0.074, 0.001, 99.918, 0.001, 0.001, 0.001, '2025-06-25 00:38:16', 23, 'student');
+INSERT INTO `emotion_record` VALUES (393, '1750783099,b98cbbbf-60da-416b-ac1b-10fd09c75452', 'r9B/MNGuxPIGsTJxraxtFw==', 'e32734ee7591b7098212fb07864c438c', 6.742, 0.309, 0.485, 81.692, 6.948, 0.204, 3.621, '2025-06-25 00:38:19', 23, 'student');
+INSERT INTO `emotion_record` VALUES (394, '1750783099,b98cbbbf-60da-416b-ac1b-10fd09c75452', 'r9B/MNGuxPIGsTJxraxtFw==', '80e910e4e2debdd44939a179030de5d0', 0.01, 0.01, 0.01, 97.408, 2.519, 0.014, 0.029, '2025-06-25 00:38:19', 23, 'student');
+INSERT INTO `emotion_record` VALUES (395, '1750783099,b98cbbbf-60da-416b-ac1b-10fd09c75452', 'r9B/MNGuxPIGsTJxraxtFw==', 'd9a7452e509125ad62241f9a24d711aa', 0.019, 0.019, 0.019, 75.249, 22.438, 0.468, 1.787, '2025-06-25 00:38:19', 23, 'student');
+INSERT INTO `emotion_record` VALUES (396, '1750783101,d238da56-bb81-4c04-8baa-8028f099f34c', 'aAlO3myLwMb17o1QWeG5PQ==', 'dcd807462be3b31df5103ee7870a335c', 1.219, 4.014, 0.861, 33.316, 1.53, 58.538, 0.521, '2025-06-25 00:38:21', 23, 'student');
+INSERT INTO `emotion_record` VALUES (397, '1750783101,d238da56-bb81-4c04-8baa-8028f099f34c', 'aAlO3myLwMb17o1QWeG5PQ==', '9797131a98226b7d5f888d388d53ef5e', 0.097, 22.617, 0.088, 69.835, 0.296, 6.972, 0.095, '2025-06-25 00:38:21', 23, 'student');
+INSERT INTO `emotion_record` VALUES (398, '1750783101,d238da56-bb81-4c04-8baa-8028f099f34c', 'aAlO3myLwMb17o1QWeG5PQ==', 'f413b3ecb9656801b67c9b3e12cf12ec', 0.006, 0.006, 0.006, 97.54, 2.208, 0.006, 0.227, '2025-06-25 00:38:21', 23, 'student');
+INSERT INTO `emotion_record` VALUES (399, '1750783102,b9b4fdea-60ab-4c79-8324-2fee87303834', '+5oKVJB240YGj018Rk2SWQ==', 'bdd9a6ce315b6c689ba2c1392cc8ca6d', 0.382, 38.307, 12.619, 40.69, 0.382, 7.236, 0.382, '2025-06-25 00:38:23', 23, 'student');
+INSERT INTO `emotion_record` VALUES (400, '1750783102,b9b4fdea-60ab-4c79-8324-2fee87303834', '+5oKVJB240YGj018Rk2SWQ==', '7a06d598d6d940d25c31a4669e0a7e86', 0.001, 0.001, 0.001, 99.992, 0.001, 0.001, 0.005, '2025-06-25 00:38:23', 23, 'student');
+INSERT INTO `emotion_record` VALUES (401, '1750783102,b9b4fdea-60ab-4c79-8324-2fee87303834', '+5oKVJB240YGj018Rk2SWQ==', 'dffba3045cc8509ef354939141b0c4ce', 0.147, 1.477, 1.08, 96.114, 0.604, 0.431, 0.147, '2025-06-25 00:38:23', 23, 'student');
+INSERT INTO `emotion_record` VALUES (402, '1750783102,b9b4fdea-60ab-4c79-8324-2fee87303834', '+5oKVJB240YGj018Rk2SWQ==', '4ba94aa9d34b64abb0d87a94dd44c9b7', 0.043, 0.043, 0.043, 0.972, 0.043, 98.812, 0.043, '2025-06-25 00:38:23', 23, 'student');
 
 -- ----------------------------
 -- Table structure for teacher
@@ -516,6 +550,7 @@ CREATE TABLE `teacher`  (
 -- ----------------------------
 INSERT INTO `teacher` VALUES (1, '学哥');
 INSERT INTO `teacher` VALUES (3, '煮开');
+INSERT INTO `teacher` VALUES (4, '汤姆猫');
 
 -- ----------------------------
 -- Table structure for video_processing_status
@@ -558,7 +593,7 @@ INSERT INTO `video_processing_status` VALUES (18, 21, 'teacher', 'COMPLETED', 10
 INSERT INTO `video_processing_status` VALUES (19, 21, 'student', 'COMPLETED', 100, NULL, '2025-05-21 16:24:05', '2025-05-21 16:24:21');
 INSERT INTO `video_processing_status` VALUES (20, 22, 'teacher', 'COMPLETED', 100, NULL, '2025-05-21 16:31:19', '2025-05-21 16:31:24');
 INSERT INTO `video_processing_status` VALUES (21, 22, 'student', 'COMPLETED', 100, NULL, '2025-05-21 16:31:36', '2025-05-21 16:31:51');
-INSERT INTO `video_processing_status` VALUES (22, 23, 'teacher', 'COMPLETED', 100, NULL, '2025-06-24 15:50:20', '2025-06-24 15:50:33');
-INSERT INTO `video_processing_status` VALUES (23, 23, 'student', 'COMPLETED', 100, NULL, '2025-06-24 15:50:26', '2025-06-24 15:50:43');
+INSERT INTO `video_processing_status` VALUES (22, 23, 'teacher', 'COMPLETED', 100, NULL, '2025-06-24 15:50:20', '2025-06-25 00:38:00');
+INSERT INTO `video_processing_status` VALUES (23, 23, 'student', 'COMPLETED', 100, NULL, '2025-06-24 15:50:26', '2025-06-25 00:38:23');
 
 SET FOREIGN_KEY_CHECKS = 1;
