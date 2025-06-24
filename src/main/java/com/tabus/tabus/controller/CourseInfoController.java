@@ -5,11 +5,7 @@ import com.tabus.tabus.common.Result;
 import com.tabus.tabus.pojo.entity.CourseInfo;
 import com.tabus.tabus.service.ICourseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -44,6 +40,31 @@ public class CourseInfoController {
     public Result endCourse(Long courseId) {
         // 调用课程服务的结束课程方法，结束时间为当前时间
         courseService.endCourse(courseId, LocalDateTime.now());
+        return Result.success();
+    }
+
+    @GetMapping("/list")
+    public Result list() {
+        return Result.success(courseService.list());
+    }
+
+    @PostMapping("/add")
+    public Result add(@RequestBody CourseInfo courseInfo) {
+        // 自动设置课程开始时间为当前时间
+        courseInfo.setStartTime(java.time.LocalDateTime.now());
+        courseService.save(courseInfo);
+        return Result.success();
+    }
+
+    @PutMapping("/update")
+    public Result update(@RequestBody CourseInfo courseInfo) {
+        courseService.updateById(courseInfo);
+        return Result.success();
+    }
+
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Long id) {
+        courseService.removeById(id);
         return Result.success();
     }
 }

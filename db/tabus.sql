@@ -3,114 +3,101 @@
 
  Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 50741
+ Source Server Version : 80200
  Source Host           : localhost:3306
  Source Schema         : tabus
 
  Target Server Type    : MySQL
- Target Server Version : 50741
+ Target Server Version : 80200
  File Encoding         : 65001
 
- Date: 21/05/2025 16:33:17
+ Date: 24/06/2025 16:01:09
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for class_name
+-- ----------------------------
+DROP TABLE IF EXISTS `class_name`;
+CREATE TABLE `class_name`  (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '班级名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '班级表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of class_name
+-- ----------------------------
+INSERT INTO `class_name` VALUES (1, '饼胚1班');
+INSERT INTO `class_name` VALUES (2, '肉饼2班');
+
+-- ----------------------------
 -- Table structure for classroom_analysis
 -- ----------------------------
 DROP TABLE IF EXISTS `classroom_analysis`;
 CREATE TABLE `classroom_analysis`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `course_id` bigint(20) NOT NULL COMMENT '关联课程ID',
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `course_id` bigint NOT NULL COMMENT '关联课程ID',
   `student_raise_rate` double NULL DEFAULT NULL COMMENT '学生抬头率（百分比）',
   `student_lower_rate` double NULL DEFAULT NULL COMMENT '学生低头率（百分比）',
   `teacher_happiness_avg` double NULL DEFAULT NULL COMMENT '教师高兴值均值',
   `teacher_anger_avg` double NULL DEFAULT NULL COMMENT '教师愤怒值均值',
   `teacher_neutral_avg` double NULL DEFAULT NULL COMMENT '教师平静值均值',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `course_id`(`course_id`) USING BTREE,
+  INDEX `course_id`(`course_id` ASC) USING BTREE,
   CONSTRAINT `classroom_analysis_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course_info` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '课堂分析数据表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of classroom_analysis
 -- ----------------------------
-INSERT INTO `classroom_analysis` VALUES (1, 2, 100, 0, 77.02855555555556, 0.04566666666666666, 3.6573333333333338);
-INSERT INTO `classroom_analysis` VALUES (4, 4, 100, 0, 77.02855555555556, 0.04566666666666666, 3.6573333333333338);
-INSERT INTO `classroom_analysis` VALUES (5, 6, 0, 100, 0, 0, 0);
-INSERT INTO `classroom_analysis` VALUES (6, 6, 0, 100, 0, 0, 0);
-INSERT INTO `classroom_analysis` VALUES (7, 11, 100, 0, 77.02855555555556, 0.04566666666666666, 3.6573333333333338);
-INSERT INTO `classroom_analysis` VALUES (8, 12, 0, 100, 0, 0, 0);
-INSERT INTO `classroom_analysis` VALUES (9, 12, 0, 100, 0, 0, 0);
-INSERT INTO `classroom_analysis` VALUES (10, 12, 0, 100, 0, 0, 0);
-INSERT INTO `classroom_analysis` VALUES (11, 12, 0, 100, 0, 0, 0);
-INSERT INTO `classroom_analysis` VALUES (12, 12, 0, 100, 0, 0, 0);
-INSERT INTO `classroom_analysis` VALUES (13, 12, 0, 100, 0, 0, 0);
-INSERT INTO `classroom_analysis` VALUES (14, 14, 0, 100, 0, 0, 0);
-INSERT INTO `classroom_analysis` VALUES (15, 14, 0, 100, 0, 0, 0);
-INSERT INTO `classroom_analysis` VALUES (16, 15, 100, 0, 77.02855555555556, 0.04566666666666666, 3.6573333333333338);
-INSERT INTO `classroom_analysis` VALUES (17, 16, 100, 0, 77.02855555555556, 0.04566666666666666, 3.6573333333333338);
-INSERT INTO `classroom_analysis` VALUES (18, 20, 100, 0, 77.02855555555556, 0.04566666666666666, 3.6573333333333338);
-INSERT INTO `classroom_analysis` VALUES (19, 21, 100, 0, 77.02855555555556, 0.04566666666666666, 3.6573333333333338);
+INSERT INTO `classroom_analysis` VALUES (20, 23, 100, 0, 77.02855555555556, 0.04566666666666666, 3.6573333333333338);
 
 -- ----------------------------
 -- Table structure for course_info
 -- ----------------------------
 DROP TABLE IF EXISTS `course_info`;
 CREATE TABLE `course_info`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `teacher` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '教师姓名',
   `course_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '课程名称',
   `class_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '班级（如“高三1班”）',
   `start_time` datetime NOT NULL COMMENT '课程开始时间',
   `end_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '课程结束时间',
-  PRIMARY KEY (`id`) USING BTREE
+  `teacher_id` bigint NULL DEFAULT NULL COMMENT '教师ID',
+  `class_id` bigint NULL DEFAULT NULL COMMENT '班级ID',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `fk_teacher`(`teacher_id` ASC) USING BTREE,
+  INDEX `fk_class_name`(`class_id` ASC) USING BTREE,
+  CONSTRAINT `fk_class_name` FOREIGN KEY (`class_id`) REFERENCES `class_name` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_teacher` FOREIGN KEY (`teacher_id`) REFERENCES `teacher` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '课程基本信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of course_info
 -- ----------------------------
-INSERT INTO `course_info` VALUES (1, '朱凯', '肉饼制作实验课', '高二3班', '2025-05-14 16:25:43', '2025-05-14 16:40:56');
-INSERT INTO `course_info` VALUES (2, '朱凯小哥哥', '肉饼制作实验课', '高二3班', '2025-05-14 16:34:38', '2025-05-14 17:10:03');
-INSERT INTO `course_info` VALUES (3, '朱凯老师', '汉堡肉片实验课', '中专3班', '2025-05-14 19:59:55', '2025-05-14 19:59:54');
-INSERT INTO `course_info` VALUES (4, '学哥', '汉堡配菜发明课', '本生砖3班', '2025-05-14 21:17:57', '2025-05-14 21:30:41');
-INSERT INTO `course_info` VALUES (5, '王老师', '123', '本生砖3班', '2025-05-21 15:05:52', '2025-05-21 15:05:52');
-INSERT INTO `course_info` VALUES (6, '学哥', '123', '本生砖2班', '2025-05-21 15:07:29', '2025-05-21 15:07:54');
-INSERT INTO `course_info` VALUES (7, '张老师', '123', '计算机科学1班', '2025-05-21 15:10:05', '2025-05-21 15:10:05');
-INSERT INTO `course_info` VALUES (8, '李老师', '123', '本生砖3班', '2025-05-21 15:19:31', '2025-05-21 15:19:31');
-INSERT INTO `course_info` VALUES (9, '学哥', '123', '本生砖3班', '2025-05-21 15:20:07', '2025-05-21 15:20:07');
-INSERT INTO `course_info` VALUES (10, '李老师', '123', '本生砖3班', '2025-05-21 15:33:56', '2025-05-21 15:33:56');
-INSERT INTO `course_info` VALUES (11, '王老师', '123', '本生砖3班', '2025-05-21 15:44:46', '2025-05-21 15:45:54');
-INSERT INTO `course_info` VALUES (12, '学哥', '123', '本生砖3班', '2025-05-21 15:53:29', '2025-05-21 15:54:07');
-INSERT INTO `course_info` VALUES (13, '李老师', '123', '本生砖3班', '2025-05-21 15:54:36', '2025-05-21 15:54:35');
-INSERT INTO `course_info` VALUES (14, '李老师', '123', '本生砖2班', '2025-05-21 15:58:46', '2025-05-21 16:00:05');
-INSERT INTO `course_info` VALUES (15, '张老师', '123', '本生砖2班', '2025-05-21 16:01:54', '2025-05-21 16:02:32');
-INSERT INTO `course_info` VALUES (16, '李老师', '123', '本生砖2班', '2025-05-21 16:03:12', '2025-05-21 16:03:41');
-INSERT INTO `course_info` VALUES (17, '学哥', '123', '本生砖2班', '2025-05-21 16:08:34', '2025-05-21 16:08:33');
-INSERT INTO `course_info` VALUES (18, '张老师', '123', '本生砖2班', '2025-05-21 16:10:51', '2025-05-21 16:10:50');
-INSERT INTO `course_info` VALUES (19, '李老师', '123', '本生砖2班', '2025-05-21 16:14:33', '2025-05-21 16:14:32');
-INSERT INTO `course_info` VALUES (20, '李老师', '123', '本生砖1班', '2025-05-21 16:15:28', '2025-05-21 16:16:05');
-INSERT INTO `course_info` VALUES (21, '王老师', '123', '本生砖1班', '2025-05-21 16:23:53', '2025-05-21 16:24:27');
-INSERT INTO `course_info` VALUES (22, '李老师', '213', '计算机科学1班', '2025-05-21 16:31:14', '2025-05-21 16:31:14');
+INSERT INTO `course_info` VALUES (23, '学哥', '汉堡历史', '肉饼2班', '2025-06-24 15:38:57', '2025-06-24 15:50:53', NULL, NULL);
+INSERT INTO `course_info` VALUES (24, '煮开', '饼胚烤制', '饼胚1班', '2025-06-24 15:44:33', '2025-06-24 15:44:32', NULL, NULL);
+INSERT INTO `course_info` VALUES (25, '学哥', '肉饼种类', '肉饼2班', '2025-06-24 15:44:50', '2025-06-24 15:44:49', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for discussion_text
 -- ----------------------------
 DROP TABLE IF EXISTS `discussion_text`;
 CREATE TABLE `discussion_text`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `course_id` bigint(20) NOT NULL COMMENT '关联课程ID',
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `course_id` bigint NOT NULL COMMENT '关联课程ID',
   `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '讨论内容（如学生发言）',
   `timestamp` datetime NOT NULL COMMENT '发言时间',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `course_id`(`course_id`) USING BTREE,
+  INDEX `course_id`(`course_id` ASC) USING BTREE,
   CONSTRAINT `discussion_text_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course_info` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '课堂讨论文本表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of discussion_t ext
+-- Records of discussion_text
 -- ----------------------------
 
 -- ----------------------------
@@ -118,7 +105,7 @@ CREATE TABLE `discussion_text`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `emotion_record`;
 CREATE TABLE `emotion_record`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `request_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `image_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `face_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -130,11 +117,11 @@ CREATE TABLE `emotion_record`  (
   `sadness` double NULL DEFAULT NULL,
   `surprise` double NULL DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `course_id` bigint(20) NULL DEFAULT NULL COMMENT '关联课程ID',
+  `course_id` bigint NULL DEFAULT NULL COMMENT '关联课程ID',
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '记录类型（student/teacher）',
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `idx_request_id`(`request_id`) USING BTREE,
-  INDEX `idx_created_at`(`created_at`) USING BTREE
+  INDEX `idx_request_id`(`request_id` ASC) USING BTREE,
+  INDEX `idx_created_at`(`created_at` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 343 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '表情识别表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -482,23 +469,69 @@ INSERT INTO `emotion_record` VALUES (339, '1747816312,154989ef-8945-4066-b597-1f
 INSERT INTO `emotion_record` VALUES (340, '1747816312,154989ef-8945-4066-b597-1f35ba75a93f', '+5oKVJB240YGj018Rk2SWQ==', '9c61af5227337ae3bc085326131f6242', 0.001, 0.001, 0.001, 99.992, 0.001, 0.001, 0.005, '2025-05-21 16:31:51', 22, 'student');
 INSERT INTO `emotion_record` VALUES (341, '1747816312,154989ef-8945-4066-b597-1f35ba75a93f', '+5oKVJB240YGj018Rk2SWQ==', '54d913faa47845d8e951670fd2cdc58f', 0.147, 1.477, 1.08, 96.114, 0.604, 0.431, 0.147, '2025-05-21 16:31:51', 22, 'student');
 INSERT INTO `emotion_record` VALUES (342, '1747816312,154989ef-8945-4066-b597-1f35ba75a93f', '+5oKVJB240YGj018Rk2SWQ==', 'ace1b349ca4a2c4b100860210961a0b8', 0.043, 0.043, 0.043, 0.972, 0.043, 98.812, 0.043, '2025-05-21 16:31:51', 22, 'student');
+INSERT INTO `emotion_record` VALUES (343, '1750751427,cb00a328-3743-4ef7-87de-16d2d45d5bff', 'tV9yywN3KMrMMA+DbvWfwg==', 'fddf331d2517c7103d23f641bc26a223', 0.002, 0.003, 0.002, 99.702, 0.002, 0.281, 0.007, '2025-06-24 15:50:28', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (344, '1750751428,21f02a8d-b808-4ddb-ac94-2739d3492cb8', '/sktHVxs7MomhjCYYAA+5A==', '42774a8afd574118e6401837a063b703', 0.122, 0.08, 0.048, 98.454, 0.033, 1.183, 0.079, '2025-06-24 15:50:28', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (345, '1750751428,9693864e-138f-4a7a-ab82-dd58ac57f1eb', 'ddlsZhKVYeg+K5D11KVUDA==', '929cc0d76c6fc15c4c4c7ce7f6488d27', 34.362, 1.826, 3.182, 13.045, 7.899, 37.86, 1.826, '2025-06-24 15:50:29', 23, 'student');
+INSERT INTO `emotion_record` VALUES (346, '1750751428,6be639f4-7c68-4de3-961c-64656199b607', 'hC1DF+oNhYaq8L5uyCtRoQ==', '00bf101a1b8cd6fbe318d0d18075ecbe', 0.018, 0.208, 0.018, 92.882, 0.084, 6.753, 0.037, '2025-06-24 15:50:29', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (347, '1750751429,228b3a91-e6a4-4c0b-93fb-53a4dd87db76', 'VCgRTBs9igv/X6k0Sxo9VQ==', '9ad64cff267e626ab68450fa1068157f', 0.002, 0.002, 0.002, 99.97, 0.002, 0.019, 0.004, '2025-06-24 15:50:29', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (348, '1750751430,238e2238-9b7a-4746-99d1-116234f0a12f', 'fEGbK1dXHzaaYoUXZrdzwQ==', 'd3bf0e2daea7526024b1f53a3993386e', 0.009, 0.91, 0.009, 98.911, 0.009, 0.141, 0.01, '2025-06-24 15:50:30', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (349, '1750751430,9ca6ed7e-0066-4582-a051-1fab22fa5d0d', '85UUoqxyZdJmxjZR2TgiHw==', '2f83826b5606393d5839ba86c82e4651', 1.155, 0.004, 0.017, 98.809, 0.004, 0.006, 0.004, '2025-06-24 15:50:30', 23, 'student');
+INSERT INTO `emotion_record` VALUES (350, '1750751430,a62b1e9f-fba6-47df-b660-3b9601e83b5e', '6XvArDX6AhhmB4kWdnkm6w==', '466753847e7c3addbc66c9ca950c08c0', 0.148, 4.162, 0.537, 3.261, 15.755, 0.148, 75.99, '2025-06-24 15:50:31', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (351, '1750751431,61cf00a5-870a-4cf8-8c84-729f41f99c35', 'dn+KEYZ/jDHdQRaLjZAvqA==', '4bbffeafdd5e700797015f168ae77f3d', 0.272, 5.043, 0.077, 88.294, 0.077, 6.158, 0.077, '2025-06-24 15:50:32', 23, 'student');
+INSERT INTO `emotion_record` VALUES (352, '1750751431,49fc1bcc-a0e8-4c70-822c-8abf01356465', 'C6c8B4IN2Lfh5qT35qQAKg==', 'd9192d84d18331c3102a8a60cca0c7a6', 0.002, 0.034, 0.002, 99.842, 0.002, 0.072, 0.045, '2025-06-24 15:50:32', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (353, '1750751432,25184941-c48c-4f4e-809e-618c38792f79', 'XIlfm8adpMpBBBTaa+QK9A==', '45dc83f4144cd58d02ec0303579153bc', 0.002, 0.017, 0.002, 99.88, 0.002, 0.018, 0.08, '2025-06-24 15:50:32', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (354, '1750751433,c5bdf1f1-f701-4a97-b33f-66d966a260d1', 'Z9nrEm2bJmjE5W8xEtcskw==', '40597302b07351e3ed039215fcadeacc', 0.106, 11.787, 0.799, 0.355, 17.027, 0.106, 69.821, '2025-06-24 15:50:33', 23, 'teacher');
+INSERT INTO `emotion_record` VALUES (355, '1750751433,3dd36185-e416-4e11-a9d6-6df1d544dea2', '/t1D8nO+t9aR6rezEf1HxA==', 'bcd75390c83312a7de207d1b152e0e81', 0.031, 0.13, 0.031, 99.539, 0.184, 0.055, 0.031, '2025-06-24 15:50:33', 23, 'student');
+INSERT INTO `emotion_record` VALUES (356, '1750751434,d447d0ab-f0d7-4c8e-8a65-661272a69c23', 'Vdd24M+86gPRWXCrrgtzeA==', 'a0bb30ece224132088e6e5b80d95e4e1', 0.036, 0.05, 0.008, 98.983, 0.007, 0.909, 0.007, '2025-06-24 15:50:35', 23, 'student');
+INSERT INTO `emotion_record` VALUES (357, '1750751434,d447d0ab-f0d7-4c8e-8a65-661272a69c23', 'Vdd24M+86gPRWXCrrgtzeA==', '044be4c5cc8d50d1ae4947a29f883188', 1.247, 50.335, 1.056, 2.354, 15.158, 1.528, 28.321, '2025-06-24 15:50:35', 23, 'student');
+INSERT INTO `emotion_record` VALUES (358, '1750751436,bcf0f7f1-3c93-434f-9de0-4a5b8e5cdd72', 'WUe5ibWtbKvoRBiXwLusUA==', '3e913f85546a6b6998e72b7cdb26f4f9', 7.552, 0.536, 7.279, 82.746, 0.536, 0.536, 0.814, '2025-06-24 15:50:36', 23, 'student');
+INSERT INTO `emotion_record` VALUES (359, '1750751436,bcf0f7f1-3c93-434f-9de0-4a5b8e5cdd72', 'WUe5ibWtbKvoRBiXwLusUA==', '4224003e14d4310a12f7a7118ea6ec6c', 0.093, 0.093, 9.094, 78.294, 0.589, 11.742, 0.093, '2025-06-24 15:50:36', 23, 'student');
+INSERT INTO `emotion_record` VALUES (360, '1750751436,bcf0f7f1-3c93-434f-9de0-4a5b8e5cdd72', 'WUe5ibWtbKvoRBiXwLusUA==', '3c87718582e6c29f8edf7dc0aeb3c57b', 0.126, 1.124, 1.432, 1.588, 0.103, 95.573, 0.054, '2025-06-24 15:50:36', 23, 'student');
+INSERT INTO `emotion_record` VALUES (361, '1750751437,c2a2cabb-ec60-430e-b37b-5f2ec88bb1e4', '5wMkry20WsFtVLxZDNriGQ==', 'd2a4801279f751530b013063ac1c7070', 1.579, 0.889, 0.238, 88.954, 1.378, 6.744, 0.216, '2025-06-24 15:50:38', 23, 'student');
+INSERT INTO `emotion_record` VALUES (362, '1750751437,c2a2cabb-ec60-430e-b37b-5f2ec88bb1e4', '5wMkry20WsFtVLxZDNriGQ==', '19db0e569242ee185ad7c5b5e3b2e9b4', 0.003, 0.074, 0.001, 99.918, 0.001, 0.001, 0.001, '2025-06-24 15:50:38', 23, 'student');
+INSERT INTO `emotion_record` VALUES (363, '1750751440,e00b9d5c-14ab-447c-b0aa-d597292f708c', 'r9B/MNGuxPIGsTJxraxtFw==', 'beb99903bef9c03cc7afdb468b78b3ef', 6.742, 0.309, 0.485, 81.692, 6.948, 0.204, 3.621, '2025-06-24 15:50:40', 23, 'student');
+INSERT INTO `emotion_record` VALUES (364, '1750751440,e00b9d5c-14ab-447c-b0aa-d597292f708c', 'r9B/MNGuxPIGsTJxraxtFw==', '6c09519b0bfd4be93629f635d4287d29', 0.01, 0.01, 0.01, 97.408, 2.519, 0.014, 0.029, '2025-06-24 15:50:40', 23, 'student');
+INSERT INTO `emotion_record` VALUES (365, '1750751440,e00b9d5c-14ab-447c-b0aa-d597292f708c', 'r9B/MNGuxPIGsTJxraxtFw==', 'e93a21c5199784ede8c145fd02c30c6a', 0.019, 0.019, 0.019, 75.249, 22.438, 0.468, 1.787, '2025-06-24 15:50:40', 23, 'student');
+INSERT INTO `emotion_record` VALUES (366, '1750751441,7e995197-4dd8-414d-b6ba-4e428f2ae7a7', 'aAlO3myLwMb17o1QWeG5PQ==', '001ceab78931f2202493a267d116c7de', 1.219, 4.014, 0.861, 33.316, 1.53, 58.538, 0.521, '2025-06-24 15:50:42', 23, 'student');
+INSERT INTO `emotion_record` VALUES (367, '1750751441,7e995197-4dd8-414d-b6ba-4e428f2ae7a7', 'aAlO3myLwMb17o1QWeG5PQ==', 'a22a6329278a841c148c090a5b3704a7', 0.097, 22.617, 0.088, 69.835, 0.296, 6.972, 0.095, '2025-06-24 15:50:42', 23, 'student');
+INSERT INTO `emotion_record` VALUES (368, '1750751441,7e995197-4dd8-414d-b6ba-4e428f2ae7a7', 'aAlO3myLwMb17o1QWeG5PQ==', 'a2997b4df2aa6c78d1c18906e7620773', 0.006, 0.006, 0.006, 97.54, 2.208, 0.006, 0.227, '2025-06-24 15:50:42', 23, 'student');
+INSERT INTO `emotion_record` VALUES (369, '1750751443,0c1bd21d-01d9-4e07-84f1-6b0e487e1c98', '+5oKVJB240YGj018Rk2SWQ==', '09820d4445aea670d5c99e9a6b996a3f', 0.382, 38.307, 12.619, 40.69, 0.382, 7.236, 0.382, '2025-06-24 15:50:43', 23, 'student');
+INSERT INTO `emotion_record` VALUES (370, '1750751443,0c1bd21d-01d9-4e07-84f1-6b0e487e1c98', '+5oKVJB240YGj018Rk2SWQ==', 'a63cd6be6df48976872ee801d68a4d6f', 0.001, 0.001, 0.001, 99.992, 0.001, 0.001, 0.005, '2025-06-24 15:50:43', 23, 'student');
+INSERT INTO `emotion_record` VALUES (371, '1750751443,0c1bd21d-01d9-4e07-84f1-6b0e487e1c98', '+5oKVJB240YGj018Rk2SWQ==', 'a90a0873de9b9d14b35d9a3678becda2', 0.147, 1.477, 1.08, 96.114, 0.604, 0.431, 0.147, '2025-06-24 15:50:43', 23, 'student');
+INSERT INTO `emotion_record` VALUES (372, '1750751443,0c1bd21d-01d9-4e07-84f1-6b0e487e1c98', '+5oKVJB240YGj018Rk2SWQ==', 'cbe5a4cd7b9d5df6a82b1c95ebec87ff', 0.043, 0.043, 0.043, 0.972, 0.043, 98.812, 0.043, '2025-06-24 15:50:43', 23, 'student');
+
+-- ----------------------------
+-- Table structure for teacher
+-- ----------------------------
+DROP TABLE IF EXISTS `teacher`;
+CREATE TABLE `teacher`  (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '教师姓名',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '教师表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of teacher
+-- ----------------------------
+INSERT INTO `teacher` VALUES (1, '学哥');
+INSERT INTO `teacher` VALUES (3, '煮开');
 
 -- ----------------------------
 -- Table structure for video_processing_status
 -- ----------------------------
 DROP TABLE IF EXISTS `video_processing_status`;
 CREATE TABLE `video_processing_status`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `course_id` bigint(20) NOT NULL COMMENT '课程ID',
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `course_id` bigint NOT NULL COMMENT '课程ID',
   `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '视频类型（student/teacher）',
   `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '处理状态（PENDING, PROCESSING, COMPLETED, ERROR）',
-  `progress` int(3) NOT NULL DEFAULT 0 COMMENT '处理进度（0-100）',
+  `progress` int NOT NULL DEFAULT 0 COMMENT '处理进度（0-100）',
   `error_message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '错误信息',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `uk_course_type`(`course_id`, `type`) USING BTREE COMMENT '确保每个课程的每种类型只有一条记录'
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '视频处理状态表' ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `uk_course_type`(`course_id` ASC, `type` ASC) USING BTREE COMMENT '确保每个课程的每种类型只有一条记录'
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '视频处理状态表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of video_processing_status
@@ -524,5 +557,7 @@ INSERT INTO `video_processing_status` VALUES (18, 21, 'teacher', 'COMPLETED', 10
 INSERT INTO `video_processing_status` VALUES (19, 21, 'student', 'COMPLETED', 100, NULL, '2025-05-21 16:24:05', '2025-05-21 16:24:21');
 INSERT INTO `video_processing_status` VALUES (20, 22, 'teacher', 'COMPLETED', 100, NULL, '2025-05-21 16:31:19', '2025-05-21 16:31:24');
 INSERT INTO `video_processing_status` VALUES (21, 22, 'student', 'COMPLETED', 100, NULL, '2025-05-21 16:31:36', '2025-05-21 16:31:51');
+INSERT INTO `video_processing_status` VALUES (22, 23, 'teacher', 'COMPLETED', 100, NULL, '2025-06-24 15:50:20', '2025-06-24 15:50:33');
+INSERT INTO `video_processing_status` VALUES (23, 23, 'student', 'COMPLETED', 100, NULL, '2025-06-24 15:50:26', '2025-06-24 15:50:43');
 
 SET FOREIGN_KEY_CHECKS = 1;
