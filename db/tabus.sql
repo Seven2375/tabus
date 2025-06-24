@@ -11,7 +11,7 @@
  Target Server Version : 80200
  File Encoding         : 65001
 
- Date: 24/06/2025 16:01:09
+ Date: 24/06/2025 19:26:21
 */
 
 SET NAMES utf8mb4;
@@ -78,9 +78,10 @@ CREATE TABLE `course_info`  (
 -- ----------------------------
 -- Records of course_info
 -- ----------------------------
-INSERT INTO `course_info` VALUES (23, '学哥', '汉堡历史', '肉饼2班', '2025-06-24 15:38:57', '2025-06-24 15:50:53', NULL, NULL);
-INSERT INTO `course_info` VALUES (24, '煮开', '饼胚烤制', '饼胚1班', '2025-06-24 15:44:33', '2025-06-24 15:44:32', NULL, NULL);
-INSERT INTO `course_info` VALUES (25, '学哥', '肉饼种类', '肉饼2班', '2025-06-24 15:44:50', '2025-06-24 15:44:49', NULL, NULL);
+INSERT INTO `course_info` VALUES (23, '学哥', '汉堡历史', '肉饼2班', '2025-06-24 15:38:57', '2025-06-24 15:50:53', 1, 2);
+INSERT INTO `course_info` VALUES (24, '煮开', '饼胚烤制', '饼胚1班', '2025-06-24 15:44:33', '2025-06-24 15:44:32', 3, 1);
+INSERT INTO `course_info` VALUES (25, '学哥', '肉饼种类', '肉饼2班', '2025-06-24 15:44:50', '2025-06-24 15:44:49', 1, 2);
+INSERT INTO `course_info` VALUES (27, '煮开', '汉堡配料调制', '饼胚1班', '2025-06-24 16:49:22', '2025-06-24 16:49:21', 3, 1);
 
 -- ----------------------------
 -- Table structure for discussion_text

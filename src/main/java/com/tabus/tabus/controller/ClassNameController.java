@@ -35,4 +35,9 @@ public class ClassNameController {
         classNameService.removeById(id);
         return Result.success();
     }
+
+    @GetMapping("/{id}")
+    public Result getById(@PathVariable Long id) {
+        return Result.success(classNameService.getById(id));
+    }
 } 

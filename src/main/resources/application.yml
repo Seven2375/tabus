@@ -35,6 +35,13 @@ spring:
       max-request-size: 500MB  # 总请求最大大小
       file-size-threshold: 0  # 文件写入磁盘的阈值（0 表示直接写入磁盘）
 tabus:
+  ai:
+    hunyuan:
+      api-key: vl3D7ojstoCDNli0VePZhNJszO1lGfSr  # 腾讯混元AI的API密钥
+      assistant-id: bjkRHf7MsfKE  # 助手ID
+      connection-timeout: 10
+      read-timeout: 30
+      write-timeout: 30
   video:
     upload-dir: "${user.dir}/upload-videos"  #项目根目录下的 upload-videos 文件夹
   ffmpeg:

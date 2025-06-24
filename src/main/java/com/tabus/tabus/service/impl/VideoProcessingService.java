@@ -56,32 +56,32 @@ public class VideoProcessingService {
      */
     @PostConstruct
     public void init() {
-//        try {
-//            // 1. 优先使用配置文件中指定的路径
-//            if (StrUtil.isNotBlank(configuredFfmpegPath)) {
-//                if (isValidFfmpegPath(configuredFfmpegPath)) {
-//                    this.ffmpegPath = configuredFfmpegPath;
-//                    log.info("使用配置文件中的 FFmpeg 路径: {}", ffmpegPath);
-//                    return;
-//                }
-//                log.warn("配置文件中的 FFmpeg 路径无效: {}", configuredFfmpegPath);
-//            }
-//
-//            // 2. 尝试从系统 PATH 环境变量中查找
-//            String pathFromEnv = findFfmpegInPath();
-//            if (pathFromEnv != null) {
-//                this.ffmpegPath = pathFromEnv;
-//                log.info("从系统 PATH 中找到 FFmpeg: {}", ffmpegPath);
-//                return;
-//            }
-//
-//            // 3. 所有查找方法都失败，抛出异常
-//            throw new IllegalStateException("无法找到 FFmpeg 可执行文件，请配置 tabus.ffmpeg.path");
-//
-//        } catch (Exception e) {
-//            log.error("初始化 FFmpeg 路径失败", e);
-//            throw new RuntimeException("初始化 FFmpeg 路径失败", e);
-//        }
+        try {
+            // 1. 优先使用配置文件中指定的路径
+            if (StrUtil.isNotBlank(configuredFfmpegPath)) {
+                if (isValidFfmpegPath(configuredFfmpegPath)) {
+                    this.ffmpegPath = configuredFfmpegPath;
+                    log.info("使用配置文件中的 FFmpeg 路径: {}", ffmpegPath);
+                    return;
+                }
+                log.warn("配置文件中的 FFmpeg 路径无效: {}", configuredFfmpegPath);
+            }
+
+            // 2. 尝试从系统 PATH 环境变量中查找
+            String pathFromEnv = findFfmpegInPath();
+            if (pathFromEnv != null) {
+                this.ffmpegPath = pathFromEnv;
+                log.info("从系统 PATH 中找到 FFmpeg: {}", ffmpegPath);
+                return;
+            }
+
+            // 3. 所有查找方法都失败，抛出异常
+            throw new IllegalStateException("无法找到 FFmpeg 可执行文件，请配置 tabus.ffmpeg.path");
+
+        } catch (Exception e) {
+            log.error("初始化 FFmpeg 路径失败", e);
+            throw new RuntimeException("初始化 FFmpeg 路径失败", e);
+        }
     }
 
 

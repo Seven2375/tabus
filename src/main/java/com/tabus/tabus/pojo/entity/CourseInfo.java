@@ -38,7 +38,7 @@ public class CourseInfo implements Serializable {
 //    @ApiModelProperty(value = "课程名称")
     private String courseName;
 
-//    @ApiModelProperty(value = "班级（如“高三1班”）")
+//    @ApiModelProperty(value = "班级（如"高三1班"）")
     private String className;
 
 //    @ApiModelProperty(value = "课程开始时间")
@@ -47,5 +47,10 @@ public class CourseInfo implements Serializable {
 //    @ApiModelProperty(value = "课程结束时间")
     private LocalDateTime endTime;
 
+//    @ApiModelProperty(value = "教师ID")
+    private Long teacherId;
+
+//    @ApiModelProperty(value = "班级ID")
+    private Long classId;
 
 }
